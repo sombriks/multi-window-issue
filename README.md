@@ -8,6 +8,10 @@ windows.
 - Vuex + service workers
 - [Enable developer tools properly](https://developer.mozilla.org/pt-BR/docs/Web/API/Service_Worker_API/Using_Service_Workers#Developer_tools)
 
-### Result
-
 We got limited to fetch / activation.
+
+## Attempt 2
+
+- Vuex + web workers
+
+Windows does not share their web workers

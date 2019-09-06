@@ -3,6 +3,9 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
+      <button @click="$store.dispatch('say', 'hi')">
+        {{ $store.state.hello }}
+      </button>
     </div>
     <router-view />
   </div>

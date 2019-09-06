@@ -1,25 +1,30 @@
 import Vue from "vue";
-import Vuex from "vuex";
+import Vuex, { Store } from "vuex";
 
 Vue.use(Vuex);
 
-if ("serviceWorker" in navigator) {
-  // Registra um service worker hospeadado na raiz do
-  // site usando o escopo padrão
-  navigator.serviceWorker
-    .register("/sw.js")
-    .then(function(registration) {
-      console.log("Service worker  registrado com sucesso:", registration);
-    })
-    .catch(function(error) {
-      console.log("Falha ao Registrar o Service Worker:", error);
-    });
-} else {
-  console.log("Service workers não suportado!");
-}
-
-export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {}
+const store = new Store({
+  state: {
+    hello: "x"
+  },
+  mutations: {
+    setHello(state, hello) {
+      state.hello = hello;
+      return state;
+    }
+  },
+  actions: {
+    say(_, msg) {
+      console.log("on say");
+      worker.postMessage(msg);
+    }
+  }
 });
+
+const worker = new Worker("ww.js");
+
+worker.onmessage = e => {
+  store.commit("setHello", e.data);
+};
+
+export default store;
