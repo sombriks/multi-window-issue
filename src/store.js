@@ -16,15 +16,15 @@ const store = new Store({
   actions: {
     say(_, msg) {
       console.log("on say");
-      worker.postMessage(msg);
+      // worker.postMessage(msg);
+      localStorage.setItem("msg", msg + new Date());
     }
   }
 });
 
-const worker = new Worker("ww.js");
-
-worker.onmessage = e => {
-  store.commit("setHello", e.data);
-};
+window.addEventListener("storage", e => {
+  console.log(e);
+  store.commit("setHello", localStorage.getItem("msg"));
+});
 
 export default store;

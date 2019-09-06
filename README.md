@@ -15,3 +15,9 @@ We got limited to fetch / activation.
 - Vuex + web workers
 
 Windows does not share their web workers
+
+## Attempt 3
+
+- Vuex + storage events
+
+Partial success: all other windows receives the `onstorage` event except the one creating it.
